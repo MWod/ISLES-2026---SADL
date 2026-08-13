@@ -1,0 +1,22 @@
+# @package _global_
+# Per-sample bucket-weighted DC+TopK with `target_ml=3.0` - a mid-point between
+# the default 5.0 and the more aggressive tml2 setting. Explores whether the
+# sweet spot for per-sample volume weighting sits closer to the small-lesion
+# end of the volume distribution.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: bucket_weighted_dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerBucketWeighted
+trainer:
+  bucket:
+    target_ml: 3.0
+experiment_name: hpcv8_bucketweighted_tml3_v2_dicetopk_500ep

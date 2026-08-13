@@ -1,0 +1,16 @@
+# Placeholder path config for the public release.
+# Fill each `null` with an absolute path on your own machine before running any
+# entrypoint. The mapping mirrors the Python module `paths.pc_paths` - see
+# there for a description of what each key means.
+
+project_path: null  # user: set to your project checkout directory
+raw_data_path: null  # user: set to your raw ATLAS v2 data directory
+parsed_data_path: null  # user: set to your parsed/preprocessed data directory
+splits_path: null  # user: set to your Splits/ output directory
+nnunet_raw: null  # user: set to your nnUNet_raw directory
+nnunet_preprocessed: null  # user: set to your nnUNet_preprocessed directory
+nnunet_results: null  # user: set to your nnUNet_results directory
+checkpoints_path: null  # user: set to your Checkpoints/ output directory
+logs_path: null  # user: set to your Logs/ output directory
+evaluation_results_path: null  # user: set to your Evaluation_Results/ output directory
+third_party_path: null  # user: set to your third_party/ directory (vendored nnU-Net)

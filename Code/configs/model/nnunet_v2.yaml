@@ -1,0 +1,8 @@
+name: nnunet_v2
+architecture: PlainConvUNet
+configuration: 3d_fullres
+# Use upstream nnUNetTrainer for the baseline so we don't need our
+# IslesTrainer to be discoverable by recursive_find_python_class.
+# Switch to IslesTrainer once the discovery hook is wired.
+trainer_class: nnUNetTrainer
+plans_identifier: ${preprocessing.plans_identifier}

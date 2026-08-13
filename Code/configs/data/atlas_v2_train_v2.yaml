@@ -1,0 +1,18 @@
+# Data config for V2 (Training_Raw_V2). Parallel to atlas_v2_train.yaml.
+# Differences:
+#   * `name: atlas_v2_v2` - distinct from V1's `atlas_v2` so experiment_name
+#     auto-formatters don't collide.
+#   * `exclude_sites: []` - V2's R016 has 1 ATLAS3 session; no longer empty.
+#   * `release: v2-2026-06-17` - embedded in dataset.json by stage_v2_dataset.py.
+name: atlas_v2_v2
+raw_root: ${paths.raw_data_path}
+nnunet_dataset_id: ${nnunet_dataset_id}
+nnunet_dataset_name: ${nnunet_dataset_name}
+modality_channels: [T1w]
+label_classes:
+  background: 0
+  lesion: 1
+sessions_tsv: ${paths.project_path}/data_analysis/sessions.tsv
+exclude_sites: []
+sform_warnings_action: fix
+release: v2-2026-06-17

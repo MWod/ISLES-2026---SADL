@@ -1,0 +1,8 @@
+name: hpc_500ep
+num_epochs: 500
+num_iterations_per_epoch: 250
+num_val_iterations_per_epoch: 50
+deep_supervision: true
+oversample_foreground_percent: 0.33
+mixed_precision: true
+compile: false

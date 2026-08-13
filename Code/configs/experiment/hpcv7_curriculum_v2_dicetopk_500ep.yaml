@@ -1,0 +1,20 @@
+# @package _global_
+# Size-based curriculum learning: epoch 0 exposes only the top 10% (by lesion
+# volume); the warmup grows the visible pool linearly until epoch 150 (all
+# cases). Hypothesis: the network learns coarse anatomy on large lesions before
+# being asked to localise small ones, so small-lesion learning happens once
+# large-lesion fits are stable.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerCurriculum
+experiment_name: hpcv7_curriculum_v2_dicetopk_500ep

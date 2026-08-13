@@ -1,0 +1,18 @@
+# @package _global_
+# DA5 augmentation x dice_topk x 700 epochs. Uses the upstream nnU-Net DA5
+# recipe (heavier intensity, spatial, and corruption transforms) with the
+# dice_topk loss and a longer schedule as a cross-site generalisation probe.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2_da5
+  - override /trainer: hpc_700ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: nnUNetTrainerDA5
+experiment_name: hpcv7_da5_v2_dicetopk_700ep

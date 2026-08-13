@@ -1,0 +1,7 @@
+name: bucket_weighted_dice_topk
+type: bucket_weighted_dice_topk
+weight_ce: 1.0
+weight_dice: 1.0
+k_pct: 10.0
+smooth: 1.0e-5
+label_smoothing: 0.0

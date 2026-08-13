@@ -1,0 +1,9 @@
+name: tb_lite
+backend: tensorboard
+log_dir: ${paths.logs_path}/${experiment_name}
+scalars_every_n_steps: 200
+image_every_n_epochs: 100
+log_grad_norm: false
+log_throughput: true
+log_per_site: false
+log_per_bucket: false

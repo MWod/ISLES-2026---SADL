@@ -1,0 +1,30 @@
+# Root Hydra configuration for MICCAI 2026 ISLES.
+#
+# Override defaults via CLI:
+#   python scripts/train.py model=nnunet_resenc loss=focal_tversky split=site_disjoint_test3
+#   python scripts/train.py --config-name experiment/baseline_nnunet_random_test10
+
+defaults:
+  - data: atlas_v2_train_v2
+  - split: v2_site_disjoint_test3
+  - preprocessing: nnunet_default
+  - augmentation: nnunet_default
+  - model: nnunet_v2
+  - trainer: hpc_500ep
+  - loss: dice_topk
+  - optimizer: adamw
+  - eval: isles2026
+  - logging: tb_lite
+  - compute: local
+  - paths: local
+  - _self_
+
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+fold: 0
+experiment_name: ${model.name}_${trainer.name}_${split.name}_${loss.name}_seed${seed}
+checkpoint_path: null
+# Optional warm-start from a compatible pretrained checkpoint.
+# null = train from scratch (unchanged default). Set to a path or ${autopath:Checkpoints/<file>.pth}.
+pretrained_weights: null

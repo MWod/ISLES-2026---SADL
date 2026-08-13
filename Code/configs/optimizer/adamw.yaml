@@ -1,0 +1,6 @@
+name: adamw
+type: AdamW
+lr: 3.0e-4
+weight_decay: 1.0e-4
+scheduler: CosineAnnealing
+scheduler_t_max: ${trainer.num_epochs}

@@ -1,0 +1,8 @@
+name: nnunet_v2_da5
+architecture: PlainConvUNet
+configuration: 3d_fullres
+# nnUNetTrainerDA5 is an upstream variant with much stronger data augmentation
+# (heavy intensity, spatial, and corruption transforms). Used as the first
+# local ablation against the baseline - direct cross-site generalisation probe.
+trainer_class: nnUNetTrainerDA5
+plans_identifier: ${preprocessing.plans_identifier}

@@ -1,0 +1,20 @@
+# @package _global_
+# Mixture-of-experts at the highest-resolution segmentation head (K=3 experts).
+# Gating from the encoder bottleneck (AdaptiveAvgPool -> Linear -> softmax).
+# A load-balancing auxiliary loss (weight 0.01) prevents collapse. The gating
+# is UNSUPERVISED - the network learns which expert suits each sample; cohort
+# labels are NOT injected into the batch.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerCohortMoE
+experiment_name: hpcv7_moe_cohort_v2_dicetopk_500ep

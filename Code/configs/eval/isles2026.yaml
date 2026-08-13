@@ -1,0 +1,10 @@
+name: isles2026
+metrics: [dice, hd95, avd_ml, lesion_f1, count_f1]
+per_site: true
+per_bucket: true
+# Hand-tuned cutpoints. Data-driven percentiles may be adopted after review.
+lesion_volume_buckets_ml: [0.5, 5.0, 50.0]
+lesion_f1_iou_threshold: 0.20
+viz_k_cases: 6
+viz_selection: stratified_dice_quantiles
+ensemble_method: softmax_mean

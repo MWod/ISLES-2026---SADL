@@ -1,0 +1,9 @@
+name: dice_topk
+type: dice_topk
+weight_ce: 1.0
+weight_dice: 1.0
+k_pct: 10.0
+batch_dice: true
+smooth: 1.0e-5
+ddp: false
+label_smoothing: 0.0

@@ -1,0 +1,19 @@
+# @package _global_
+# Diffusion-paste lesion augmentation. Depends on a prebuilt
+# `synthetic_lesion_bank/` directory under nnUNet_preprocessed/. Each training
+# patch has p=0.3 of receiving a DDPM-generated lesion pasted in via a sphere
+# mask + Gaussian feather.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: diffusion_lesion
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainer
+experiment_name: hpcv7_diffusionaug_v2_dicetopk_500ep

@@ -1,0 +1,7 @@
+name: local
+device: cuda
+num_gpus: 1
+num_workers: 12
+pin_memory: true
+persistent_workers: true
+allow_tf32: true

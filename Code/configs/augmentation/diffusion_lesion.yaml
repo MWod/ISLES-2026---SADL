@@ -1,0 +1,12 @@
+name: diffusion_lesion
+mode: nnunet_v2_default
+gin: {enabled: false, p: 0.5, n_layers: 4, channels: 2}
+mixstyle: {enabled: false, p: 0.5, alpha: 0.1}
+bigaug: {enabled: false, p: 0.3}
+carvemix: {enabled: false}
+diffusion_lesion:
+  enabled: true
+  p: 0.3
+  feather_sigma: 1.5
+  voxel_volume_mm3: 1.0  # 1mm iso plans space
+  bank_dir: ${autopath:nnunet_preprocessed}/synthetic_lesion_bank

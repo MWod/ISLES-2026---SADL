@@ -1,0 +1,22 @@
+# V2 leaderboard-honest split. Mirrors V1's site_disjoint_test3 in name AND in
+# held-out-site list (R018+R027+R047) so V2 ensemble numbers stay directly
+# comparable to V1 test-set numbers.
+#
+# Differences from V1's `site_disjoint_test3`:
+#   * `strategy: site_disjoint_fixed` (not `site_disjoint`) - pins the exact
+#     test-site list instead of relying on the stratified-size picker (which
+#     would not necessarily reselect R018+R027+R047 from V2's 55-site universe).
+#   * `train_eligibility_column: train_eligible` - drops the 5 empty-mask + 1
+#     header-only-metadata V2 cases at the split-build step. None of these
+#     live in R018/R027/R047, so the test set is unaffected; the train pool
+#     loses 6 sessions (1453 - 91 - 6 = 1356 train + val).
+name: v2_site_disjoint_test3
+strategy: site_disjoint_fixed
+params:
+  test_sites: [R018, R027, R047]
+  train_eligibility_column: train_eligible
+  seed: 42
+inner_n_folds: 5
+inner_seed: 42
+inner_group_by: site
+manifest_dir: ${paths.splits_path}/v2_site_disjoint_test3

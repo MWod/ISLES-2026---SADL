@@ -1,0 +1,20 @@
+# @package _global_
+# Per-sample volume-bucket-weighted DC+TopK (up-weights the 0.5-5 mL bucket via
+# target_ml=5, weights clipped to [0.5, 4.0]). Loss is computed per-sample then
+# weighted-averaged; DeepSupervisionWrapper-compatible. Trainer derives
+# per-sample weights from `target[0]` voxel-count x plans-space spacing each
+# train step.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: bucket_weighted_dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerBucketWeighted
+experiment_name: hpcv7_bucketweighted_v2_dicetopk_500ep

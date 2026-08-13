@@ -1,0 +1,19 @@
+# @package _global_
+# Cohort-balanced sampling: each of the 3 cohorts (Training / Testing / ATLAS3)
+# contributes equal expected mass per training batch via per-case sampling
+# probabilities proportional to 1 / (3 * |cohort|). Validation loader stays
+# vanilla for comparability.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerCohortBalanced
+experiment_name: hpcv7_cohortaware_v2_dicetopk_500ep

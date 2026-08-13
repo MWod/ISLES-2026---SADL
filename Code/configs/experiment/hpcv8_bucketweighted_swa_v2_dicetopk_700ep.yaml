@@ -1,0 +1,17 @@
+# @package _global_
+# Combined per-sample bucket-weighted DC+TopK with stochastic weight averaging
+# (SWA) at 700 epochs. IslesTrainerBucketWeightedSWA composes both via MRO.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_700ep
+  - override /loss: bucket_weighted_dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainerBucketWeightedSWA
+experiment_name: hpcv8_bucketweighted_swa_v2_dicetopk_700ep

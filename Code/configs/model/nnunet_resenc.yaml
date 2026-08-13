@@ -1,0 +1,7 @@
+name: nnunet_resenc
+architecture: ResidualEncoderUNet
+configuration: 3d_fullres
+trainer_class: IslesTrainerResEnc
+plans_identifier: ${preprocessing.plans_identifier}_resenc
+# nnU-Net v2 ResEnc presets selected via the ExperimentPlanner; M -> Medium, L -> Large.
+resenc_preset: M

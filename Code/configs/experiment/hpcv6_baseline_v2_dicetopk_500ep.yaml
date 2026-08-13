@@ -1,0 +1,16 @@
+# @package _global_
+# Baseline PlainConvUNet with Dice + Top-K CE, 500 epochs.
+defaults:
+  - override /data: atlas_v2_train_v2
+  - override /split: v2_site_disjoint_test3
+  - override /preprocessing: nnunet_default
+  - override /augmentation: nnunet_default
+  - override /model: nnunet_v2
+  - override /trainer: hpc_500ep
+  - override /loss: dice_topk
+seed: 42
+nnunet_dataset_id: 510
+nnunet_dataset_name: Dataset510_AtlasV2_V2
+model:
+  trainer_class: IslesTrainer
+experiment_name: hpcv6_baseline_v2_dicetopk_500ep

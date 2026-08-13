@@ -1,0 +1,11 @@
+name: nnunet_default
+planner: IslesPlanner
+preprocessor: IslesPreprocessor
+# Placeholder isotropic spacing.
+target_spacing: [1.0, 1.0, 1.0]
+isotropic_enforce: true
+n4_bias_correction: false
+harmonization: none
+harmonizer_kwargs: {}
+clip_intensity_percentiles: [0.5, 99.5]
+plans_identifier: nnUNetPlans_iso10
