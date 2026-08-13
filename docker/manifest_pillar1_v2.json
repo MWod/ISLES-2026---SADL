@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "policy_json": "policy/policy.json",
+  "dataset": "Dataset510_AtlasV2_V2",
+  "configuration": "3d_fullres",
+  "experiments": [
+    {"name": "hpcv7_bucketweighted_v2_dicetopk_500ep",      "trainer": "IslesTrainerBucketWeighted",    "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv7_da5_v2_dicetopk_700ep",                 "trainer": "nnUNetTrainerDA5",              "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv7_moe_cohort_v2_dicetopk_500ep",          "trainer": "IslesTrainerCohortMoE",         "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv7_cohortaware_v2_dicetopk_500ep",         "trainer": "IslesTrainerCohortBalanced",    "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv7_curriculum_v2_dicetopk_500ep",          "trainer": "IslesTrainerCurriculum",        "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv7_diffusionaug_v2_dicetopk_500ep",        "trainer": "IslesTrainer",                  "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv6_baseline_v2_dicetopk_500ep",            "trainer": "IslesTrainer",                  "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv6_resenc_v2_dicetopk_500ep",              "trainer": "IslesTrainerResEnc",            "plans": "nnUNetPlans_iso10_resenc", "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv8_bucketweighted_swa_v2_dicetopk_700ep",  "trainer": "IslesTrainerBucketWeightedSWA", "plans": "nnUNetPlans_iso10",        "checkpoint_name": "swa.pth"},
+    {"name": "hpcv8_bucketweighted_tml2_v2_dicetopk_500ep", "trainer": "IslesTrainerBucketWeighted",    "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"},
+    {"name": "hpcv8_bucketweighted_tml3_v2_dicetopk_500ep", "trainer": "IslesTrainerBucketWeighted",    "plans": "nnUNetPlans_iso10",        "checkpoint_name": "checkpoint_best.pth"}
+  ],
+  "provenance": {
+    "policy_hash": "b4c86ddf234203be",
+    "holdout_dice": 0.7322,
+    "holdout_lesion_f1": 0.7461,
+    "holdout_pr_auc": 0.8430,
+    "tune_report": "tune_report.json",
+    "note": "experiment order is 1:1 with policy.weights (11-vector). The SWA member uses swa.pth (the Pillar-1 tune used the SWA-based ensemble).",
+    "generated_from": "tune_report.json (per-fold policy aggregation over the 5 site-disjoint folds)"
+  }
+}

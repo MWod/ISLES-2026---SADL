@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nnunet-isles"
+version = "0.1.0"
+description = "MICCAI 2026 ISLES Challenge - automatic stroke lesion segmentation on T1-weighted MRI."
+requires-python = ">=3.10"
+authors = [
+    {name = "SanoAGH Team"},
+]
+maintainers = [
+    {name = "Marek Wodzinski"},
+    {name = "Gniewosz Drwiega"},
+    {name = "Wojciech Szymanski"},
+]
+dependencies = [
+    # Note: nnU-Net v2.7.0 (vendored at third_party/nnUNet/) is installed
+    # separately via `pip install -e third_party/nnUNet/` and will resolve its
+    # own deps. We list those deps here too so this project can install
+    # standalone without nnU-Net (e.g. for EDA-only runs).
+    "torch>=2.1.2,!=2.9.*",
+    "hydra-core>=1.3",
+    "omegaconf>=2.3",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "scikit-image>=0.19.3",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+    "tensorboard>=2.14",
+    "simpleitk>=2.2.1",
+    "tqdm>=4.65",
+    "pyarrow>=14.0",
+    "nibabel>=5.1",
+    "acvl-utils>=0.2.6,<0.3",
+    "dynamic-network-architectures>=0.4.1,<0.5",
+    "batchgenerators>=0.25.1",
+    "batchgeneratorsv2>=0.3.2",
+    "blosc2>=3.0.0b1",
+    "einops",
+    "yacs",
+    "imagecodecs",
+    "tifffile",
+    "graphviz",
+    "requests",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.package-dir]
+"" = "Code/src"
+"paths" = "Code/paths"
+
+[tool.setuptools.packages.find]
+where = ["Code/src", "Code"]
+include = ["nnunet_isles*", "paths*"]
+
+[tool.pytest.ini_options]
+testpaths = ["Code/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+extend-exclude = ["third_party", "Code/outputs", "Logs", "Checkpoints"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "PIE"]
+ignore = ["E501", "B008", "B028"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,60 @@
+# MICCAI 2026 ISLES - Local Requirements
+# Platform: x86_64 Linux, CUDA 12.x
+#
+# Install with:
+#   python3.11 -m venv /path/to/your/venv       # user: pick your venv location
+#   source /path/to/your/venv/bin/activate
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
+#   pip install -e .
+#   pip install -e third_party/nnUNet/
+#
+# nnU-Net v2.7.0 is vendored at third_party/nnUNet/ - installed as editable.
+
+# --- PyTorch (CUDA 12.1 wheel; nnU-Net v2.7.0 forbids 2.9.* and requires >=2.1.2) ---
+torch>=2.1.2,!=2.9.*,<2.6
+torchvision>=0.16
+
+# --- Config ---
+hydra-core==1.3.2
+omegaconf==2.3.0
+
+# --- Scientific ---
+numpy>=1.26,<2.2
+scipy>=1.11
+pandas>=2.1
+scikit-image>=0.22
+scikit-learn>=1.4
+
+# --- Visualization ---
+matplotlib>=3.8
+seaborn>=0.13
+tensorboard>=2.16
+
+# --- Medical / nnU-Net v2.7.0 deps (pinned to its declared ranges) ---
+simpleitk>=2.2.1
+nibabel>=5.1
+acvl-utils>=0.2.6,<0.3
+dynamic-network-architectures>=0.4.1,<0.5
+batchgenerators>=0.25.1
+batchgeneratorsv2>=0.3.2
+blosc2>=3.0.0b1
+einops
+yacs
+imagecodecs
+tifffile
+graphviz
+requests
+
+# --- IO ---
+pyarrow>=15.0
+tqdm>=4.65
+
+# --- Dev / Testing ---
+pytest>=7.4
+pytest-cov>=4.1
+ruff>=0.4
+
+# --- Official ISLES 2026 evaluation (utils/eval_utils.py from
+# https://github.com/ezequieldlrosa/isles26). Used offline for scoring;
+# NOT copied into the submission Docker.
+panoptica==1.0.1

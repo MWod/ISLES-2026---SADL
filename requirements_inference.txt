@@ -1,0 +1,55 @@
+# MICCAI 2026 ISLES - Docker Inference Requirements (minimal, pinned)
+#
+# Used by docker/Dockerfile. No torch +cu wheels here - base image is
+# nvidia/cuda:12.4.0-runtime-ubuntu22.04 and the pip install resolves a
+# manylinux wheel matching CUDA 12.4.
+
+# --- PyTorch (matches Docker base CUDA 12.4; nnU-Net v2.7.0 forbids 2.9.*) ---
+torch==2.5.1
+torchvision==0.20.1
+
+# --- Scientific (must match training env enough that checkpoints load) ---
+numpy>=1.26,<2.2
+scipy>=1.11
+pandas>=2.1
+scikit-image>=0.22
+scikit-learn>=1.4
+
+# --- Medical / nnU-Net v2.7.0 deps ---
+# These MUST match nnU-Net's declared runtime dependencies in
+# third_party/nnUNet/pyproject.toml - nnU-Net's trainer/logger modules
+# import several of these at MODULE LOAD TIME, so even inference-only
+# containers need them to be importable when `recursive_find_python_class`
+# scans the trainer package.
+simpleitk>=2.2.1
+nibabel>=5.1
+acvl-utils>=0.2.6,<0.3
+dynamic-network-architectures>=0.4.1,<0.5
+batchgenerators>=0.25.1
+batchgeneratorsv2>=0.3.2
+blosc2>=3.0.0b1
+einops
+yacs
+imagecodecs
+tifffile
+graphviz
+requests
+# Below: imported at module load time by nnunetv2.training.logging.nnunet_logger
+# - indispensable even for inference-only. Adding these avoids a
+# ModuleNotFoundError at `recursive_find_python_class` time.
+matplotlib
+seaborn
+# Transitive of scikit-learn, but pinning explicitly avoids surprises.
+threadpoolctl
+# Optional acvl_utils dep for its connected-components utility. Only ~40 MB
+# but nnU-Net's fallback code paths can reach it; safer to include.
+connected-components-3d
+
+# --- Config (predict.py uses minimal OmegaConf parsing; full hydra not needed) ---
+omegaconf>=2.3
+
+# --- IO ---
+tqdm>=4.65
+
+# nnU-Net itself is COPIED into the image from third_party/nnUNet/ and
+# installed editable with --no-deps. Do not list nnunetv2 here.

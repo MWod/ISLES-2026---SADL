@@ -1,0 +1,59 @@
+# MICCAI 2026 ISLES - HPC Requirements (ARM aarch64, GPU node)
+#
+# Most heavy deps come from the site-provided ML software module and are inherited
+# via `python -m venv --system-site-packages`. Version pins are >= to avoid
+# fighting with the system versions.
+#
+# Install with (after loading modules):
+#   python -m venv --system-site-packages /path/to/venvs/MICCAI_2026_ISLES
+#   source /path/to/venvs/MICCAI_2026_ISLES/bin/activate
+#   pip install -r requirements_hpc.txt
+#   pip install -e .
+#   pip install -e third_party/nnUNet/
+
+# --- torch / torchvision provided by the site ML module - do not list here. ---
+
+# --- Config ---
+hydra-core>=1.3
+omegaconf>=2.3
+
+# --- Scientific ---
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+scikit-image>=0.21
+scikit-learn>=1.3
+
+# --- Visualization ---
+matplotlib>=3.7
+seaborn>=0.12
+tensorboard>=2.14
+
+# --- Medical / nnU-Net v2.7.0 deps ---
+simpleitk>=2.2.1
+nibabel>=5.1
+acvl-utils>=0.2.6,<0.3
+dynamic-network-architectures>=0.4.1,<0.5
+batchgenerators>=0.25.1
+batchgeneratorsv2>=0.3.2
+blosc2>=3.0.0b1
+einops
+yacs
+imagecodecs
+tifffile
+graphviz
+requests
+
+# --- IO ---
+pyarrow>=14.0
+tqdm>=4.65
+
+# --- Dev / Testing ---
+pytest>=7.0
+pytest-cov>=4.0
+ruff>=0.4
+
+# --- Official ISLES 2026 evaluation (utils/eval_utils.py from
+# https://github.com/ezequieldlrosa/isles26). Offline scoring only; not
+# imported inside the submission Docker.
+panoptica==1.0.1

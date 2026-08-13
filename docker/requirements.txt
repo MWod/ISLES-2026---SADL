@@ -1,0 +1,40 @@
+# ISLES 2026 SADL container - Python deps installed on top of
+# pytorch/pytorch:2.13.0-cuda12.6-cudnn9-runtime.
+#
+# torch/torchvision/CUDA come from the base image via the venv's
+# --system-site-packages inheritance - do NOT list them here.
+
+# --- FastAPI server (Grand Challenge invoke API) ---
+fastapi
+uvicorn
+
+# --- Core scientific / medical ---
+numpy>=1.26,<2.2
+scipy>=1.11
+scikit-image>=0.22
+scikit-learn>=1.4
+simpleitk>=2.2.1
+nibabel>=5.1
+
+# --- nnU-Net v2.7.0 runtime deps ---
+dynamic-network-architectures>=0.4.1,<0.5
+batchgenerators>=0.25.1
+batchgeneratorsv2>=0.3.2
+blosc2>=3.0.0b1
+einops
+yacs
+imagecodecs
+tifffile
+graphviz
+requests
+connected-components-3d
+
+# --- nnU-Net imports these at module-load time even for inference-only ---
+matplotlib
+seaborn
+threadpoolctl
+pandas>=2.1
+
+# --- Config helpers ---
+omegaconf>=2.3
+tqdm>=4.65
